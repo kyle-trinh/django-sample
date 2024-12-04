@@ -8,5 +8,6 @@ services:
       - DJANGO_SETTINGS_MODULE=container_testing.settings
     volumes:
       - .:/app
+      - ./logs:/var/log/django
     ports:
       - '8000:8000'

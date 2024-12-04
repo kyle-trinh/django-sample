@@ -138,7 +138,7 @@ LOGGING = {
         'rotating_file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django.log',
+            'filename': '/var/log/django/django.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
             'formatter': 'verbose',
