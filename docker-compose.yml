@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=container_testing.settings
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
