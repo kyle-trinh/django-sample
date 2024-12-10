@@ -6,6 +6,7 @@ from django.http import JsonResponse
 # Create your views here.
 class PingView(APIView):
     def get(self, request):
+        divide = 1 / 0 
         return Response({"message": "pong"})
 
 def hello(request):
