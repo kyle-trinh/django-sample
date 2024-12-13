@@ -2,7 +2,12 @@
 import logging
 import json
 
-logging.getLogger().setLevel(logging.INFO)
+logger = logging.getLogger()
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 class LoggingMiddleware:
     def __init__(self, get_response):
@@ -11,8 +16,7 @@ class LoggingMiddleware:
 
     def __call__(self, request):
         print('invoked')
-        logging.info(f"Incoming request: {request.method} {request.path} {json.dumps(request.body.decode('utf-8'), indent=4)}")
-        logging.info(json.dumps(request.body.decode('utf-8'), indent=4))
+        logging.info(f"Incoming request: {request.method} {request.path} \n{json.dumps(json.loads(request.body), indent=4)}")
         response = self.get_response(request)
         logging.info(f"Outgoing response: {response.status_code}")
         return response

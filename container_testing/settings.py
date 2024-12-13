@@ -28,6 +28,43 @@ sentry_sdk.init(
     },
 )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        # 'rotating_file': {
+        #     'level': 'INFO',
+        #     'class': 'logging.handlers.RotatingFileHandler',
+        #     'filename': '/var/log/django/django.log',
+        #     'maxBytes': 1024*1024*10,  # 10MB
+        #     'backupCount': 5,
+        #     'formatter': 'verbose',
+        # },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        # 'django.request': {
+        #     'handlers': ['console'],
+        #     'level': 'INFO',  # change debug level as appropiate
+        #     'propagate': True,
+        # },
+    },
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -146,39 +183,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import logging
 from logging.handlers import RotatingFileHandler
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        # 'rotating_file': {
-        #     'level': 'INFO',
-        #     'class': 'logging.handlers.RotatingFileHandler',
-        #     'filename': '/var/log/django/django.log',
-        #     'maxBytes': 1024*1024*10,  # 10MB
-        #     'backupCount': 5,
-        #     'formatter': 'verbose',
-        # },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        # 'django.request': {
-        #     'handlers': ['console'],
-        #     'level': 'INFO',  # change debug level as appropiate
-        #     'propagate': True,
-        # },
-    },
-}
