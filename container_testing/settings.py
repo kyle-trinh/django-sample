@@ -14,6 +14,7 @@ from pathlib import Path
 
 import sentry_sdk
 
+
 sentry_sdk.init(
     dsn="https://1d75fe43a6e24f3b4523074ee8153cff@o4508443100053504.ingest.us.sentry.io/4508443102085120",
     # Set traces_sample_rate to 1.0 to capture 100%
@@ -54,6 +55,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'container_testing.quickstart.middleware.LoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'container_testing.urls'
@@ -150,14 +155,14 @@ LOGGING = {
         },
     },
     'handlers': {
-        'rotating_file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/django.log',
-            'maxBytes': 1024*1024*10,  # 10MB
-            'backupCount': 5,
-            'formatter': 'verbose',
-        },
+        # 'rotating_file': {
+        #     'level': 'INFO',
+        #     'class': 'logging.handlers.RotatingFileHandler',
+        #     'filename': '/var/log/django/django.log',
+        #     'maxBytes': 1024*1024*10,  # 10MB
+        #     'backupCount': 5,
+        #     'formatter': 'verbose',
+        # },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
@@ -166,9 +171,14 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['rotating_file', 'console'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         },
+        # 'django.request': {
+        #     'handlers': ['console'],
+        #     'level': 'INFO',  # change debug level as appropiate
+        #     'propagate': True,
+        # },
     },
 }

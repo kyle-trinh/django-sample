@@ -11,3 +11,7 @@ class PingView(APIView):
 
 def hello(request):
     return JsonResponse({"message": "hello"})
+
+class PostView(APIView):
+    def post(self, request):
+        return Response({"post": "request"})

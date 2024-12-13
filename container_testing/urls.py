@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from container_testing.quickstart.views import hello
+from container_testing.quickstart.views import hello, PostView
 
 urlpatterns = [
     path('ping/', hello, name='hello'),
+    path('post-request/', PostView.as_view(), name='post-request'),
     path('admin/', admin.site.urls),
 ]
